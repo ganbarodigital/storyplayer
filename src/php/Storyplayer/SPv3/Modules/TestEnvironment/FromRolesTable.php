@@ -41,9 +41,12 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
 
+use Prose\Prose;
 use DataSift\Stone\ObjectLib\BaseObject;
+use Storyplayer\SPv3\Modules\Log;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
 
 /**
  * retrieve data from the internal hosts table
@@ -74,10 +77,10 @@ class FromRolesTable extends Prose
     public function getRolesTable()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the roles table for the current test environment");
+        $log = Log::usingLog()->startAction("get the roles table for the current test environment");
 
         // what is our roles table?
-        $rolesTable = fromRuntimeTable($this->entryKey)->getTable();
+        $rolesTable = RuntimeTable::fromRuntimeTable($this->entryKey)->getTable();
 
         // all done
         $log->endAction();
@@ -95,7 +98,7 @@ class FromRolesTable extends Prose
     public function getDetailsForRole($roleName)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get details for role '{$roleName}' for the current test environment");
+        $log = Log::usingLog()->startAction("get details for role '{$roleName}' for the current test environment");
 
         // pull the table
         $rolesTable = $this->getRolesTable();

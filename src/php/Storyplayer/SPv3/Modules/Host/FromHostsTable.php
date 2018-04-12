@@ -44,6 +44,8 @@
 namespace Storyplayer\SPv3\Modules\Host;
 
 use Prose\Prose;
+use Storyplayer\SPv3\Modules\Log;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
 
 /**
  * retrieve data from the internal hosts table
@@ -75,10 +77,10 @@ class FromHostsTable extends Prose
     public function getHostsTable()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the hosts table for the current test environment");
+        $log = Log::usingLog()->startAction("get the hosts table for the current test environment");
 
         // get the table
-        $table = fromRuntimeTable($this->entryKey)->getTable();
+        $table = RuntimeTable::fromRuntimeTable($this->entryKey)->getTable();
 
         // all done
         $log->endAction();
@@ -97,10 +99,10 @@ class FromHostsTable extends Prose
     public function getDetailsForHost($hostId)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get details for host '{$hostId}' from the current test environment");
+        $log = Log::usingLog()->startAction("get details for host '{$hostId}' from the current test environment");
 
         // get the details
-        $hostDetails = fromRuntimeTable($this->entryKey)->getItem($hostId);
+        $hostDetails = RuntimeTable::fromRuntimeTable($this->entryKey)->getItem($hostId);
 
         // all done
         $log->endAction();

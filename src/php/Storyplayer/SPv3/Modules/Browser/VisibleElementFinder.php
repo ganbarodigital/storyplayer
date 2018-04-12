@@ -44,6 +44,7 @@
 namespace Storyplayer\SPv3\Modules\Browser;
 
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Trait for assisting with finding a visible element from a larger list
@@ -63,7 +64,7 @@ trait VisibleElementFinder
     {
         // what are we doing?
         $count = count($elements);
-        $log = usingLog()->startAction("looking for element '{$nth}' out of array of {$count} element(s)");
+        $log = Log::usingLog()->startAction("looking for element '{$nth}' out of array of {$count} element(s)");
 
         // special case - not enough elements, even if they were all
         // visible

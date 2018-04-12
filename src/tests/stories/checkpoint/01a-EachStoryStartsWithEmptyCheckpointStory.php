@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -29,7 +31,7 @@ $story->addTestSetup(function() {
 // ------------------------------------------------------------------------
 
 $story->addAction(function() {
-	$checkpoint = getCheckpoint();
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
 	$checkpoint->thisDataShouldDisappearInPt2 = true;
 });
 
@@ -40,8 +42,8 @@ $story->addAction(function() {
 // ------------------------------------------------------------------------
 
 $story->addPostTestInspection(function($st) {
-	$checkpoint = getCheckpoint();
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
 
-	assertsObject($checkpoint)->hasAttribute('thisDataShouldDisappearInPt2');
-	assertsBoolean($checkpoint->thisDataShouldDisappearInPt2)->isTrue();
+	SPv3\Asserts::assertsObject($checkpoint)->hasAttribute('thisDataShouldDisappearInPt2');
+	SPv3\Asserts::assertsBoolean($checkpoint->thisDataShouldDisappearInPt2)->isTrue();
 });

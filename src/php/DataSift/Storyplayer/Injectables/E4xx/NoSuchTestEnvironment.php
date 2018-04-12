@@ -41,7 +41,7 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace DataSift\Storyplayer\Cli;
+namespace DataSift\Storyplayer\Injectables;
 
 use DataSift\Stone\ExceptionsLib\Exxx_Exception;
 

@@ -49,12 +49,15 @@ use Storyplayer\SPv3\Modules\Exceptions;
 use Storyplayer\SPv3\Modules\Host\CleanupHosts;
 use Storyplayer\SPv3\Modules\Host\ExpectsFirstHostWithRole;
 use Storyplayer\SPv3\Modules\Host\ExpectsHost;
+use Storyplayer\SPv3\Modules\Host\ForEachHostWithRole;
 use Storyplayer\SPv3\Modules\Host\FromFirstHostWithRole;
 use Storyplayer\SPv3\Modules\Host\FromHost;
 use Storyplayer\SPv3\Modules\Host\FromHostsTable;
 use Storyplayer\SPv3\Modules\Host\UsingFirstHostWithRole;
 use Storyplayer\SPv3\Modules\Host\UsingHost;
 use Storyplayer\SPv3\Modules\Host\UsingHostsTable;
+use Storyplayer\SPv3\Modules\Log;
+use Storyplayer\SPv3\Modules\TestEnvironment;
 
 class Host
 {
@@ -174,11 +177,11 @@ class Host
      *
      * @param  string $roleName
      *         the role that you want to work with
-     * @return ForeachHostWithRole
+     * @return ForEachHostWithRole
      */
-    public static function foreachHostWithRole($roleName)
+    public static function forEachHostWithRole($roleName)
     {
-        return new ForeachHostWithRole(StoryTeller::instance(), [$roleName]);
+        return new ForEachHostWithRole(StoryTeller::instance(), [$roleName]);
     }
 
     /**
@@ -274,13 +277,13 @@ class Host
             throw Exceptions::newActionFailedException(__METHOD__, "first param to hostWithRole() is no longer \$st");
         }
 
-        $listOfHosts = fromRolesTable()->getDetailsForRole($roleName);
+        $listOfHosts = TestEnvironment::fromRolesTable()->getDetailsForRole($roleName);
         if (!count($listOfHosts)) {
             throw Exceptions::newActionFailedException(__METHOD__, "unknown role '{$roleName}' or no hosts for that role");
         }
 
         // what are we doing?
-        $log = usingLog()->startAction("for each host with role '{$roleName}' ... ");
+        $log = Log::usingLog()->startAction("for each host with role '{$roleName}' ... ");
 
         foreach ($listOfHosts as $hostId) {
             yield($hostId);

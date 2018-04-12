@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -29,8 +31,8 @@ $story->addAction(function() {
 // ------------------------------------------------------------------------
 
 $story->addPostTestInspection(function() {
-    $expected = fromConfig()->get("systemundertest.roles.0.params.filename");
-    $actual   = fromConfig()->get("target.groups.0.details.machines.default.params.filename");
+    $expected = SPv3\Storyplayer::fromConfig()->get("systemundertest.roles.0.params.filename");
+    $actual   = SPv3\Storyplayer::fromConfig()->get("target.groups.0.details.machines.default.params.filename");
 
-    assertsString($actual)->equals($expected);
+    SPv3\Asserts::assertsString($actual)->equals($expected);
 });

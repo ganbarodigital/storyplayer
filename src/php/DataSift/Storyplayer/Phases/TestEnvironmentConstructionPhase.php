@@ -46,9 +46,10 @@ namespace DataSift\Storyplayer\Phases;
 use Exception;
 use DataSift\Storyplayer\HostLib;
 use DataSift\Storyplayer\ProvisioningLib;
-use Storyplayer\SPv2\Modules\Exceptions\ActionFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\ExpectFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\Exceptions\ActionFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\ExpectFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\TestEnvironment;
 
 /**
  * the TestEnvironmentConstruction phase
@@ -102,7 +103,7 @@ class TestEnvironmentConstructionPhase extends InfrastructurePhase
                 }
             }
 
-            $st->usingTargetsTable()->addCurrentTestEnvironment();
+            TestEnvironment::usingTargetsTable()->addCurrentTestEnvironment();
             $phaseResult->setContinuePlaying();
 
         }

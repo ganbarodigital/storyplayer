@@ -52,12 +52,12 @@ use DataSift\Storyplayer\DeviceLib;
 use DataSift\Storyplayer\OutputLib\CodeFormatter;
 use Prose\E4xx_ObsoleteProse;
 use Prose\E5xx_NoMatchingActions;
-use Prose\PageContext;
 
 use DataSift\Stone\ObjectLib\BaseObject;
-use Storyplayer\SPv2\Modules\Exceptions;
-use StoryplayerInternals\SPv2\Modules\Events;
-use StoryplayerInternals\SPv2\Modules\Events\EventStream;
+use Storyplayer\SPv3\Modules\Exceptions;
+use StoryplayerInternals\SPv3\Modules\Events;
+use StoryplayerInternals\SPv3\Modules\Events\EventStream;
+use Storyplayer\SPv3\Modules\Browser\PageContext;
 
 /**
  * our main facilitation class
@@ -260,7 +260,7 @@ class StoryTeller
         $this->setRuntimeConfigManager($injectables->getRuntimeConfigManager());
 
         // our event support
-        $this->setEventStream(new EventStream);
+        // $this->setEventStream(new EventStream);
 
         self::$self = $this;
     }

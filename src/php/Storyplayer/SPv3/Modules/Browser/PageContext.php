@@ -41,7 +41,7 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\Browser;
 
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 

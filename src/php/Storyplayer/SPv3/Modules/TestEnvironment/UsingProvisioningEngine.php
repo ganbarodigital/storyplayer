@@ -41,7 +41,10 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
+
+use Prose\Prose;
+
 
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Storyplayer\ProvisioningLib;

@@ -41,7 +41,12 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
+
+use Prose\Prose;
+use Storyplayer\SPv3\Modules\Log;
+use Storyplayer\SPv3\Modules\TestEnvironment;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
 
 /**
  * retrieve data from the internal hosts table
@@ -68,10 +73,10 @@ class FromTargetsTable extends Prose
     public function hasCurrentTestEnvironmentSignature()
     {
         // what are we doing?
-        $log = usingLog()->startAction("do we have the test environment's config signature in the targets table?");
+        $log = Log::usingLog()->startAction("do we have the test environment's config signature in the targets table?");
 
         // do we have it?
-        $signature = fromRuntimeTable($this->entryKey)->getItem(self::SIGNATURE_KEY);
+        $signature = RuntimeTable::fromRuntimeTable($this->entryKey)->getItem(self::SIGNATURE_KEY);
         if ($signature !== null) {
             $log->endAction("yes");
             return true;
@@ -85,10 +90,10 @@ class FromTargetsTable extends Prose
     public function getCurrentTestEnvironmentSignature()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the test environment's config signature from the targets table");
+        $log = Log::usingLog()->startAction("get the test environment's config signature from the targets table");
 
         // do we have a signature?
-        $signature = fromRuntimeTable($this->entryKey)->getItem(self::SIGNATURE_KEY);
+        $signature = RuntimeTable::fromRuntimeTable($this->entryKey)->getItem(self::SIGNATURE_KEY);
 
         if ($signature === null) {
             $log->endAction('no signature found');

@@ -45,7 +45,7 @@ $story->addAction(function() {
     Browser::usingBrowser()->gotoPage("file://" . __DIR__ . '/../../testpages/WorkingWithForms.html');
 
     // get a field from a form
-    $checkpoint->field1 = fromForm("test_form")->getValue()->fieldLabelled('Page Name');
+    $checkpoint->field1 = Browser::fromForm("test_form")->getValue()->fieldLabelled('Page Name');
 });
 
 // ========================================================================

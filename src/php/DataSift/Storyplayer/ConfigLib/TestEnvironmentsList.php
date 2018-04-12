@@ -61,7 +61,8 @@ class TestEnvironmentsList extends ConfigList
         	'DataSift\Storyplayer\TestEnvironmentsLib\TestEnvironmentConfig',
         	[
         		"storyplayer/test-environments",
-        		".storyplayer/test-environments"
+        		".storyplayer/test-environments",
+                __DIR__ . '/../../../StoryplayerInternals/SPv3/Defaults/test-environments'
         	],
             [
                 new ConfigFinder(".*(?<!runtime)\\.json$"),

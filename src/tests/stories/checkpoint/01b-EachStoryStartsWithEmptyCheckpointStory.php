@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -29,8 +31,8 @@ $story->addTestSetup(function() {
 // ------------------------------------------------------------------------
 
 $story->addAction(function() {
-	$checkpoint = getCheckpoint();
-	assertsObject($checkpoint)->isEmpty();
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
+	SPv3\Asserts::assertsObject($checkpoint)->isEmpty();
 });
 
 // ========================================================================

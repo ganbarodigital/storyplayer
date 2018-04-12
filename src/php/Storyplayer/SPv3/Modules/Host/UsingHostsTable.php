@@ -44,6 +44,8 @@
 namespace Storyplayer\SPv3\Modules\Host;
 
 use Prose\Prose;
+use Storyplayer\SPv3\Modules\Log;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
 
 /**
  * manipulate the internal hosts table
@@ -78,10 +80,10 @@ class UsingHostsTable extends Prose
     public function addHost($hostId, $hostDetails)
     {
         // what are we doing?
-        $log = usingLog()->startAction("add host '{$hostId}' to current test environment hosts table");
+        $log = Log::usingLog()->startAction("add host '{$hostId}' to current test environment hosts table");
 
         // add it
-        usingRuntimeTable($this->entryKey)->addItem($hostId, $hostDetails);
+        RuntimeTable::usingRuntimeTable($this->entryKey)->addItem($hostId, $hostDetails);
 
         // all done
         $log->endAction();
@@ -98,10 +100,10 @@ class UsingHostsTable extends Prose
     public function removeHost($hostId)
     {
         // what are we doing?
-        $log = usingLog()->startAction("remove host '{$hostId}' from current test environment hosts table");
+        $log = Log::usingLog()->startAction("remove host '{$hostId}' from current test environment hosts table");
 
         // remove it
-        usingRuntimeTable($this->entryKey)->removeItem($hostId);
+        RuntimeTable::usingRuntimeTable($this->entryKey)->removeItem($hostId);
 
         // all done
         $log->endAction();
@@ -115,10 +117,10 @@ class UsingHostsTable extends Prose
     public function emptyTable()
     {
         // what are we doing?
-        $log = usingLog()->startAction("empty the hosts table completely");
+        $log = Log::usingLog()->startAction("empty the hosts table completely");
 
         // remove it
-        usingRuntimeTable($this->entryKey)->removeTable();
+        RuntimeTable::usingRuntimeTable($this->entryKey)->removeTable();
 
         // all done
         $log->endAction();

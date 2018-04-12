@@ -56,6 +56,8 @@ use DataSift\Storyplayer\Console\DevModeConsole;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Storyplayer\Injectables;
 
+use Storyplayer\SPv3\Modules\TestEnvironment;
+
 /**
  * Support for keeping the test environment around
  *
@@ -100,7 +102,7 @@ class Feature_PersistReuseTargetSupport implements Feature
         {
             // does the target exist to be reused?
             $output->setSilentMode();
-            $hasTarget = fromTargetsTable()->hasCurrentTestEnvironmentSignature();
+            $hasTarget = TestEnvironment::fromTargetsTable()->hasCurrentTestEnvironmentSignature();
             $output->resetSilentMode();
 
             if (!$hasTarget) {
@@ -111,14 +113,14 @@ class Feature_PersistReuseTargetSupport implements Feature
             // okay, so we have the test environment in the targets table,
             // but has the test environment been changed at all?
             $output->setSilentMode();
-            $origSig = fromTargetsTable()->getCurrentTestEnvironmentSignature();
+            $origSig = TestEnvironment::fromTargetsTable()->getCurrentTestEnvironmentSignature();
             $currentSig = $st->getTestEnvironmentSignature();
             $output->resetSilentMode();
 
             if ($origSig != $currentSig) {
                 // our test environment entry isn't valid, so remove it
                 $output->setSilentMode();
-                usingTargetsTable()->removeCurrentTestEnvironment();
+                TestEnvironment::usingTargetsTable()->removeCurrentTestEnvironment();
                 $output->resetSilentMode();
 
                 $output->logCliWarning("target environment config has changed since last use; ignoring --reuse-target switch");
@@ -138,13 +140,13 @@ class Feature_PersistReuseTargetSupport implements Feature
 
             // does the target exist to be reused?
             $output->setSilentMode();
-            $hasTarget = fromTargetsTable()->hasCurrentTestEnvironmentSignature();
+            $hasTarget = TestEnvironment::fromTargetsTable()->hasCurrentTestEnvironmentSignature();
             $output->resetSilentMode();
 
             if ($hasTarget) {
                 // remove this target from the table
                 $output->setSilentMode();
-                usingTargetsTable()->removeCurrentTestEnvironment();
+                TestEnvironment::usingTargetsTable()->removeCurrentTestEnvironment();
                 $output->resetSilentMode();
             }
         }

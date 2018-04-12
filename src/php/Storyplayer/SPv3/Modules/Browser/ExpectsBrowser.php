@@ -46,6 +46,7 @@ namespace Storyplayer\SPv3\Modules\Browser;
 use Prose\Prose;
 use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Test the current contents of the browser
@@ -68,7 +69,7 @@ class ExpectsBrowser extends Prose
     {
         $action = function($requiredCount, $elements, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("$elementDesc '$elementName' must not exist");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must not exist");
 
             // how many elements actually exist?
             $actualCount = count($elements);
@@ -118,7 +119,7 @@ class ExpectsBrowser extends Prose
     {
         $action = function($requiredCount, $elements, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("$elementDesc '$elementName' must exist");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must exist");
 
             $actualCount = count($elements);
             switch($requiredCount) {
@@ -165,7 +166,7 @@ class ExpectsBrowser extends Prose
     public function hasTitle($title)
     {
         // what are we doing?
-        $log = usingLog()->startAction("page title must be {$title}");
+        $log = Log::usingLog()->startAction("page title must be {$title}");
 
         // get the browser title
         $browserTitle = Browser::fromBrowser()->getTitle();
@@ -182,7 +183,7 @@ class ExpectsBrowser extends Prose
     {
         // what are we doing?
         $titlesString = implode('; or ', $titles);
-        $log = usingLog()->startAction("page title must be one of: {$titlesString}");
+        $log = Log::usingLog()->startAction("page title must be one of: {$titlesString}");
 
         // get the browser title
         $browserTitle = fromBrowser()->getTitle();
@@ -198,10 +199,10 @@ class ExpectsBrowser extends Prose
     public function currentWindowSizeIs($width, $height)
     {
         // what are we doing?
-        $log = usingLog()->startAction("current browser window dimensions must be '{$width}' x '{$height}' (w x h)");
+        $log = Log::usingLog()->startAction("current browser window dimensions must be '{$width}' x '{$height}' (w x h)");
 
         // get the dimensions
-        $dimensions = fromBrowser()->getCurrentWindowSize();
+        $dimensions = Browser::fromBrowser()->getCurrentWindowSize();
 
         // are they right?
         if ($dimensions['width'] != $width || $dimensions['height'] != $height) {

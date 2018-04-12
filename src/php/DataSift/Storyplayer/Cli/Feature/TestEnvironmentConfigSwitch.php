@@ -90,7 +90,7 @@ class Feature_TestEnvironmentConfigSwitch extends CliSwitch
         $this->addLongSwitch('test-environment');
 
         // where is our default script?
-        $defaultTargetScript = realpath(__DIR__ . "/../../../../StoryplayerInternals/SPv3/Defaults/defaultEnv.php");
+        $defaultTargetScript = realpath(__DIR__ . "/../../../../StoryplayerInternals/SPv3/Defaults/localhostEnv");
 
         // what is the required argument?
         $this->setRequiredArg('<testEnv.php>', "path to a test environment setup/teardown script");

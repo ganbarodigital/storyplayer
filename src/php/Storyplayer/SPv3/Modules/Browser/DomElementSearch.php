@@ -45,7 +45,10 @@ namespace Storyplayer\SPv3\Modules\Browser;
 
 use Exception;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
+use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
+use Storyplayer\SPv3\Modules\Timer;
 
 /**
  * Retrieve element(s) from the DOM
@@ -108,7 +111,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' elements with alt text '{$text}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' elements with alt text '{$text}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -140,7 +143,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' elements with CSS class '{$class}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' elements with CSS class '{$class}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -172,7 +175,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' elements with id '{$id}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' elements with id '{$id}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -202,7 +205,7 @@ class DomElementSearch
     public function getElementsByLabel($labelText)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get elements for label '{$labelText}'");
+        $log = Log::usingLog()->startAction("get elements for label '{$labelText}'");
 
         // our return value
         $retval = [];
@@ -229,7 +232,7 @@ class DomElementSearch
                     $labelElements[] = $tmpElement;
                 }
                 else {
-                    usingLog()->writeToLog("rejecting element containing text '{$elementText}'");
+                    Log::usingLog()->writeToLog("rejecting element containing text '{$elementText}'");
                 }
             }
 
@@ -273,7 +276,7 @@ class DomElementSearch
         $topElement = $this->getTopElement();
 
         // what are we doing?
-        $log = usingLog()->startAction("find elements associated with label '$labelText'");
+        $log = Log::usingLog()->startAction("find elements associated with label '$labelText'");
 
         $inputElementId = null;
         try {
@@ -282,7 +285,7 @@ class DomElementSearch
             });
         }
         catch (Exception $e) {
-            usingLog()->writeToLog("label '{$labelText}' is missing the 'for' attribute");
+            Log::usingLog()->writeToLog("label '{$labelText}' is missing the 'for' attribute");
 
             // this is NOT fatal - the element might be nested
         }
@@ -342,7 +345,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' with label, id or name '{$searchTerm}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' with label, id or name '{$searchTerm}'");
 
         // our return value
         $retval = [];
@@ -382,7 +385,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' elements with name '{$name}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' elements with name '{$name}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -414,7 +417,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' element with placeholder '{$text}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' element with placeholder '{$text}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -446,7 +449,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' element with text '{$text}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' element with text '{$text}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -486,7 +489,7 @@ class DomElementSearch
     {
         // what are we doing?
         $tag = $this->convertTagsToString($tags);
-        $log = usingLog()->startAction("get '{$tag}' element with title '{$title}'");
+        $log = Log::usingLog()->startAction("get '{$tag}' element with title '{$title}'");
 
         // prepare the list of tags
         if (is_string($tags)) {
@@ -519,7 +522,7 @@ class DomElementSearch
         $topElement = $this->getTopElement();
 
         // what are we doing?
-        $log = usingLog()->startAction("search the browser's DOM using a list of XPath queries");
+        $log = Log::usingLog()->startAction("search the browser's DOM using a list of XPath queries");
 
         // our set of elements to return
         $return = array();

@@ -43,8 +43,6 @@
 
 namespace Storyplayer\SPv3\Stories;
 
-use DataSift\Storyplayer\PlayerLib\Story;
-
 class BuildStory
 {
     /**

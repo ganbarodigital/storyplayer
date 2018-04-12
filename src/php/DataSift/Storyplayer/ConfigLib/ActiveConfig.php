@@ -155,6 +155,8 @@ class ActiveConfig extends WrappedConfig
 
     protected function getHostIpAddress()
     {
+        return "127.0.0.1";
+
         // step 1 - how many adapters do we have on this box?
         // @todo Maybe we want to move this somewhere more central later?
         try {

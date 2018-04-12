@@ -56,7 +56,8 @@ use DataSift\Storyplayer\PlayerLib\E4xx_NoSuchReport;
 use DataSift\Storyplayer\Console\DevModeConsole;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Storyplayer\Injectables;
-use Storyplayer\SPv2\Modules\Users;
+use Storyplayer\SPv3\Modules\TestEnvironment;
+use Storyplayer\SPv3\Modules\Users;
 
 /**
  * Support for loading / saving test user data from/to a config file
@@ -113,7 +114,7 @@ class Feature_TestUsersSupport implements Feature
         }
         else
         {
-            $setting = fromTestEnvironment()->getModuleSetting("users.readOnly");
+            $setting = TestEnvironment::fromTestEnvironment()->getModuleSetting("users.readOnly");
             if ($setting === true) {
                 Users::usingUsers()->setUsersFileIsReadOnly();
             }

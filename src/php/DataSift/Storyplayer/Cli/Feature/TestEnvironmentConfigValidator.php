@@ -48,9 +48,9 @@ use Phix_Project\ValidationLib4\ValidationResult;
 
 class Feature_TestEnvironmentConfigValidator implements Validator
 {
-    const MSG_NOTVALIDFILENAME = "invalid filename '%value%'; must end in 'Env.php'";
-    const MSG_FILENOTFOUND = "test environment file '%value%' not found";
-    const MSG_FILENOTREADABLE = "test environment file '%value%' exists, but is not readable; permissions problem?";
+    const MSG_FILENOTREADABLE = "test environment folder '%value%' exists, but contains Env.php script(s) that we cannot read; permissions problem?";
+    const MSG_FOLDERNOTFOUND = "test environment folder '%value%' not found";
+    const MSG_NOTAFOLDER = "test environment '%value%' not a folder";
 
     /**
      *
@@ -64,23 +64,33 @@ class Feature_TestEnvironmentConfigValidator implements Validator
             $result = new ValidationResult($value);
         }
 
-        // to help avoid silly mistakes, test environment config files
-        // must end in 'Env.php'
-        if (substr($value, -7) !== 'Env.php') {
-            $result->addError(static::MSG_NOTVALIDFILENAME);
-            return $result;
-        }
-
-        // does the file exist?
+        // the test environment itself must be a folder, not a file
         if (!file_exists($value)) {
-            $result->addError(static::MSG_FILENOTFOUND);
+            $result->addError(static::MSG_FOLDERNOTFOUND);
+            return $result;
+        }
+        if (!is_dir($value)) {
+            $result->addError(static::MSG_NOTAFOLDER);
             return $result;
         }
 
-        // can we read it?
-        if (!is_readable($value)) {
-            $result->addError(static::MSG_FILENOTREADABLE);
-            return $result;
+        // these files are NOT required ...
+        //
+        // but if they are present, they need to be usable!
+        foreach (['setupEnv.php', 'teardownEnv.php'] as $envFile) {
+            $envFile = $value . '/' . $envFile;
+            if (!file_exists($envFile)) {
+                continue;
+            }
+
+            // can we read it?
+            //
+            // @TODO: fix how validator results are reported, so that
+            // we can pass in whatever values we need
+            if (!is_readable($envFile)) {
+                $result->addError(static::MSG_FILENOTREADABLE);
+                return $result;
+            }
         }
 
         // if we get here, all is good

@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -29,7 +31,7 @@ $story->addAction(function() {
 // ------------------------------------------------------------------------
 
 $story->addPostTestInspection(function() {
-    $sutName = fromSystemUnderTest()->getName();
+    $sutName = SPv3\Storyplayer::fromSystemUnderTest()->getName();
 
-    assertsString($sutName)->isNotEmpty();
+    SPv3\Asserts::assertsString($sutName)->isNotEmpty();
 });

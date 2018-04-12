@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -32,7 +34,7 @@ $story->addTestCanRunCheck(function() {
 // ------------------------------------------------------------------------
 
 $story->addTestSetup(function() {
-	$checkpoint = getCheckpoint();
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
 	$checkpoint->expectedData = "fred";
 });
 
@@ -43,8 +45,8 @@ $story->addTestSetup(function() {
 // ------------------------------------------------------------------------
 
 $story->addAction(function() {
-	$checkpoint = getCheckpoint();
-	$checkpoint->actualData = fromConfig()->getModuleSetting("per-user.data1.value1");
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
+	$checkpoint->actualData = SPv3\Config::fromConfig()->getModuleSetting("per-user.data1.value1");
 });
 
 // ========================================================================
@@ -54,8 +56,8 @@ $story->addAction(function() {
 // ------------------------------------------------------------------------
 
 $story->addPostTestInspection(function() {
-	$checkpoint = getCheckpoint();
-	assertsObject($checkpoint)->hasAttribute("expectedData");
-	assertsObject($checkpoint)->hasAttribute("actualData");
-	assertsString($checkpoint->actualData)->equals($checkpoint->expectedData);
+	$checkpoint = SPv3\Checkpoint::getCheckpoint();
+	SPv3\Asserts::assertsObject($checkpoint)->hasAttribute("expectedData");
+	SPv3\Asserts::assertsObject($checkpoint)->hasAttribute("actualData");
+	SPv3\Asserts::assertsString($checkpoint->actualData)->equals($checkpoint->expectedData);
 });

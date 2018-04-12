@@ -47,7 +47,9 @@ use Exception;
 use Prose\Prose;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Storyplayer\PlayerLib\Action_LogItem;
+use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Get information from the browser
@@ -75,11 +77,11 @@ class FromBrowser extends Prose
     public function getTableContents($xpath)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get HTML table using xpath");
+        $log = Log::usingLog()->startAction("get HTML table using xpath");
 
         // can we find the table?
         try {
-            $tableElement = fromBrowser()->get()->elementByXpath($xpath);
+            $tableElement = Browser::fromBrowser()->get()->elementByXpath($xpath);
         }
         catch (Exception $e) {
             // no such table
@@ -134,7 +136,7 @@ class FromBrowser extends Prose
     {
         $action = function($element, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("check the current page for $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("check the current page for $elementDesc '$elementName'");
             if (is_object($element)) {
                 $log->endAction('found it');
                 return true;
@@ -155,7 +157,7 @@ class FromBrowser extends Prose
     {
         $action = function($element, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("retrieve the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the $elementDesc '$elementName'");
             $log->endAction();
             return $element;
         };
@@ -171,7 +173,7 @@ class FromBrowser extends Prose
     {
         $action = function($element, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("retrieve the name of the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the name of the $elementDesc '$elementName'");
             $log->endAction('name is: ' . $element->attribute('name'));
             return $element->attribute('name');
         };
@@ -187,7 +189,7 @@ class FromBrowser extends Prose
     {
         $action = function($elements, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("retrieve the names of the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the names of the $elementDesc '$elementName'");
             if (!is_array($elements)) {
                 $log->endAction('1 element found');
                 return $elements->attribute('name');
@@ -213,7 +215,7 @@ class FromBrowser extends Prose
     {
         $action = function($element, $elementName, $elementDesc) {
 
-            $log = usingLog()->startAction("retrieve the options of them $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the options of them $elementDesc '$elementName'");
             // get the elements
             $optionElements = $element->getElements('xpath', "descendant::option");
 
@@ -238,7 +240,7 @@ class FromBrowser extends Prose
     public function getTag()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("retrieve the tagname of the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the tagname of the $elementDesc '$elementName'");
             $log->endAction("tag is: " . $element->name());
             return $element->name();
         };
@@ -253,7 +255,7 @@ class FromBrowser extends Prose
     public function getText()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("retrieve the text of the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the text of the $elementDesc '$elementName'");
             $log->endAction("text is: " . $element->text());
             return $element->text();
         };
@@ -268,7 +270,7 @@ class FromBrowser extends Prose
     public function getValue()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("retrieve the value of the $elementDesc '$elementName'");
+            $log = Log::usingLog()->startAction("retrieve the value of the $elementDesc '$elementName'");
 
             // is this a select box?
             switch($element->name()) {
@@ -315,7 +317,7 @@ class FromBrowser extends Prose
         $browser = $this->device;
 
         // what are we doing?
-        $log = usingLog()->startAction("retrieve the current URL from the browser");
+        $log = Log::usingLog()->startAction("retrieve the current URL from the browser");
 
         // get the URL
         $url = $browser->url();
@@ -386,7 +388,7 @@ class FromBrowser extends Prose
         // some shorthand to make things easier to read
         $browser = $this->device;
 
-        $log = usingLog()->startAction("retrieve the current page title");
+        $log = Log::usingLog()->startAction("retrieve the current page title");
         $log->endAction("title is: " . $browser->title());
 
         return $browser->title();
@@ -404,7 +406,7 @@ class FromBrowser extends Prose
         $browser = $this->device;
 
         // what are we doing?
-        $log = usingLog()->startAction("retrieve the current browser window's dimensions");
+        $log = Log::usingLog()->startAction("retrieve the current browser window's dimensions");
 
         // get the dimensions
         $dimensions = $browser->window()->getSize();

@@ -41,10 +41,12 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\Storyplayer;
 
 use DataSift\Stone\DataLib\DataPrinter;
+use Prose\Prose;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Get information from the active config (+ anything that has been
@@ -62,7 +64,7 @@ class FromConfig extends Prose
     public function get($name)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get '$name' from the active config");
+        $log = Log::usingLog()->startAction("get '$name' from the active config");
 
         // get the details
         $config = $this->st->getActiveConfig();
@@ -87,7 +89,7 @@ class FromConfig extends Prose
     public function getAll()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the full active config");
+        $log = Log::usingLog()->startAction("get the full active config");
 
         // get the details
         $config = $this->st->getActiveConfig();
@@ -101,7 +103,7 @@ class FromConfig extends Prose
     public function getModuleSetting($settingPath)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get module setting '{$settingPath}'");
+        $log = Log::usingLog()->startAction("get module setting '{$settingPath}'");
 
         // get the active config
         $config = $this->st->getActiveConfig();
@@ -134,7 +136,7 @@ class FromConfig extends Prose
     public function hasModuleSetting($settingPath)
     {
         // what are we doing?
-        $log = usingLog()->startAction("check if module setting '{$settingPath}' exists");
+        $log = Log::usingLog()->startAction("check if module setting '{$settingPath}' exists");
 
         // get the active config
         $config = $this->st->getActiveConfig();

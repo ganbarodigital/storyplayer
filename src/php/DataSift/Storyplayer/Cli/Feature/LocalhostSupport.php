@@ -49,6 +49,8 @@ use Phix_Project\CliEngine\CliCommand;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Storyplayer\Injectables;
 
+use Storyplayer\SPv3\Modules\Host;
+
 /**
  * Support for registering 'localhost' as a host you can interact
  * with
@@ -106,9 +108,9 @@ class Feature_LocalhostSupport implements Feature
         // we need to make sure it's registered in the hosts table
         //
         // it only needs registering if an entry does not already exist
-        $entry = fromHostsTable()->getDetailsForHost('localhost');
+        $entry = Host::fromHostsTable()->getDetailsForHost('localhost');
         if ($entry === null) {
-            usingHostsTable()->addHost('localhost', $hostDetails);
+            Host::usingHostsTable()->addHost('localhost', $hostDetails);
         }
 
         // all done

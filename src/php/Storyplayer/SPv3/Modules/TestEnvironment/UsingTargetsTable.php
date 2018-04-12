@@ -41,7 +41,13 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
+
+use Prose\Prose;
+use Storyplayer\SPv3\Modules\Log;
+use Storyplayer\SPv3\Modules\TestEnvironment;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
+
 
 /**
  * manipulate the internal targets table
@@ -69,13 +75,13 @@ class UsingTargetsTable extends Prose
     public function addCurrentTestEnvironment()
     {
         // what are we doing?
-        $log = usingLog()->startAction("add current test environment to targets table");
+        $log = Log::usingLog()->startAction("add current test environment to targets table");
 
         // get the details to add
         $testEnvSig  = $this->st->getTestEnvironmentSignature();
 
         // add it
-        usingRuntimeTable($this->entryKey)->addItem(FromTargetsTable::SIGNATURE_KEY, $testEnvSig);
+        RuntimeTable::usingRuntimeTable($this->entryKey)->addItem(FromTargetsTable::SIGNATURE_KEY, $testEnvSig);
 
         // all done
         $log->endAction();
@@ -87,10 +93,10 @@ class UsingTargetsTable extends Prose
     public function removeCurrentTestEnvironment()
     {
         // what are we doing?
-        $log = usingLog()->startAction("remove current test environment from targets table");
+        $log = Log::usingLog()->startAction("remove current test environment from targets table");
 
         // remove it
-        usingRuntimeTable($this->entryKey)->removeItem(FromTargetsTable::SIGNATURE_KEY);
+        RuntimeTable::usingRuntimeTable($this->entryKey)->removeItem(FromTargetsTable::SIGNATURE_KEY);
 
         // all done
         $log->endAction();

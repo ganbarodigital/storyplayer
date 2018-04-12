@@ -48,6 +48,8 @@ use DataSift\BrowserMobProxy\BrowserMobProxyClient;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\WebDriver\WebDriverClient;
 
+use Storyplayer\SPv3\Modules\Storyplayer;
+
 /**
  * The adapter that talks to Browsermob-proxy and Selenium-standalone-server
  * running on the same host as Storyplayer
@@ -70,14 +72,14 @@ class LocalWebDriverAdapter extends BaseAdapter implements DeviceAdapter
     {
         // are we using browsermob-proxy?
         $useProxy = false;
-        if (fromConfig()->hasModuleSetting('device.browsermob.enable')) {
-            $useProxy = fromConfig()->getModuleSetting('device.browsermob.enable');
+        if (Storyplayer::fromConfig()->hasModuleSetting('device.browsermob.enable')) {
+            $useProxy = Storyplayer::fromConfig()->getModuleSetting('device.browsermob.enable');
         }
 
         // do we have a URL to use?
         $browserUrl = 'http://localhost:4444/wd/hub';
-        if (fromConfig()->hasModuleSetting('device.localwebdriver.url')) {
-            $browserUrl = fromConfig()->getModuleSetting('device.localwebdriver.url');
+        if (Storyplayer::fromConfig()->hasModuleSetting('device.localwebdriver.url')) {
+            $browserUrl = Storyplayer::fromConfig()->getModuleSetting('device.localwebdriver.url');
         }
 
         try {

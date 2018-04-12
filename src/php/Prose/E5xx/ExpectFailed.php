@@ -43,7 +43,7 @@
 
 namespace Prose;
 
-use Storyplayer\SPv2\Modules\Exceptions\ExpectFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\ExpectFailedException;
 
 /**
  * Exception thrown when an operation in an 'Except' class fails

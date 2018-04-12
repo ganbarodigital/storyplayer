@@ -45,6 +45,7 @@ namespace Storyplayer\SPv3\Modules\Host;
 
 use Storyplayer\SPv3\Modules\Exceptions;
 use Storyplayer\SPv3\Modules\Filesystem;
+use Storyplayer\SPv3\Modules\Host;
 use Storyplayer\SPv3\Modules\Log;
 use Storyplayer\SPv3\Modules\Screen;
 use StoryplayerInternals\SPv3\Modules\Deprecated;
@@ -72,7 +73,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is it running?
-        $running = fromHost($hostDetails->hostId)->getHostIsRunning();
+        $running = Host::fromHost($hostDetails->hostId)->getHostIsRunning();
         if (!$running) {
             $log->endAction();
             throw Exceptions::newExpectFailedException(__METHOD__, 'host is running', 'host is not running');
@@ -91,7 +92,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is it running?
-        $running = fromHost($hostDetails->hostId)->getHostIsRunning();
+        $running = Host::fromHost($hostDetails->hostId)->getHostIsRunning();
         if ($running) {
             $log->endAction();
             throw Exceptions::newExpectFailedException(__METHOD__, 'host is not running', 'host is running');
@@ -110,7 +111,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is it installed?
-        $details = fromHost($hostDetails->hostId)->getInstalledPackageDetails($packageName);
+        $details = Host::fromHost($hostDetails->hostId)->getInstalledPackageDetails($packageName);
         if (!isset($details->version)) {
             $log->endAction();
             throw Exceptions::newExpectFailedException(__METHOD__, "package installed", "package is not installed");
@@ -129,7 +130,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is it installed?
-        $details = fromHost($hostDetails->hostId)->getInstalledPackageDetails($packageName);
+        $details = Host::fromHost($hostDetails->hostId)->getInstalledPackageDetails($packageName);
 
         if (isset($details->version)) {
             $log->endAction();
@@ -149,7 +150,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is the process running?
-        $isRunning = fromHost($hostDetails->hostId)->getProcessIsRunning($processName);
+        $isRunning = Host::fromHost($hostDetails->hostId)->getProcessIsRunning($processName);
 
         if (!$isRunning) {
             throw Exceptions::newExpectFailedException(__METHOD__, "process '{$processName}' running", "process '{$processName}' is not running");
@@ -168,7 +169,7 @@ class ExpectsHost extends HostAwareModule
         $hostDetails = $this->getHostDetails();
 
         // is the process running?
-        $isRunning = fromHost($hostDetails->hostId)->getProcessIsRunning($processName);
+        $isRunning = Host::fromHost($hostDetails->hostId)->getProcessIsRunning($processName);
 
         if ($isRunning) {
             throw Exceptions::newExpectFailedException(__METHOD__, "process '{$processName}' not running", "process '{$processName}' is running");

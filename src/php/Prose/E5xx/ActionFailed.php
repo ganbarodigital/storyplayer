@@ -43,7 +43,7 @@
 
 namespace Prose;
 
-use Storyplayer\SPv2\Modules\Exceptions\ActionFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\ActionFailedException;
 
 /**
  * Exception thrown when an operation in an 'Action' class fails

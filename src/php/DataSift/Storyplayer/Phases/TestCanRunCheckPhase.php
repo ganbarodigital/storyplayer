@@ -44,10 +44,10 @@
 namespace DataSift\Storyplayer\Phases;
 
 use Exception;
-use Storyplayer\SPv2\Modules\Exceptions\ActionFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\ExpectFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\NotImplementedException;
-use Storyplayer\SPv2\Modules\Exceptions\StoryCannotRunException;
+use Storyplayer\SPv3\Modules\Exceptions\ActionFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\ExpectFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\Exceptions\StoryCannotRunException;
 
 /**
  * the TestShouldRun phase

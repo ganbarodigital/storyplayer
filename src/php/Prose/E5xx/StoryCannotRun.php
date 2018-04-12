@@ -43,7 +43,7 @@
 
 namespace Storyplayer\Exceptions;
 
-use Storyplayer\SPv2\Modules\Exceptions\StoryCannotRunException;
+use Storyplayer\SPv3\Modules\Exceptions\StoryCannotRunException;
 
 /**
  * Exception that stories can throw if they cannot run.

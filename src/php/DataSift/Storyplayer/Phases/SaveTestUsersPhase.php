@@ -44,7 +44,7 @@
 namespace DataSift\Storyplayer\Phases;
 
 use Exception;
-use Storyplayer\SPv2\Modules\Users;
+use Storyplayer\SPv3\Modules\Users;
 
 /**
  * save our test users to disk

@@ -41,10 +41,13 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
 
+use Prose\Prose;
 use DataSift\Stone\DataLib\DataPrinter;
 use DataSift\Stone\DataLib\DotNotationConvertor;
+
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Get information from the active test environment config
@@ -61,7 +64,7 @@ class FromTestEnvironment extends Prose
     public function get($name)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get '$name' from the test environment config");
+        $log = Log::usingLog()->startAction("get '$name' from the test environment config");
 
         // what is the full path to this data?
         $fullPath = 'target';
@@ -92,7 +95,7 @@ class FromTestEnvironment extends Prose
     public function getName()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get current test environment name");
+        $log = Log::usingLog()->startAction("get current test environment name");
 
         // get the details
         $config = $this->st->getConfig();
@@ -106,7 +109,7 @@ class FromTestEnvironment extends Prose
     public function getOption($optionName)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get option '{$optionName}' from test environment");
+        $log = Log::usingLog()->startAction("get option '{$optionName}' from test environment");
 
         // get the details
         $config = $this->st->getConfig();
@@ -128,7 +131,7 @@ class FromTestEnvironment extends Prose
     public function getModuleSetting($setting)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get '{$setting}' from test environment's module settings");
+        $log = Log::usingLog()->startAction("get '{$setting}' from test environment's module settings");
 
         // get the details
         $fullPath = 'target.moduleSettings.' . $setting;
@@ -164,7 +167,7 @@ class FromTestEnvironment extends Prose
     public function getConfig()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the test environment config");
+        $log = Log::usingLog()->startAction("get the test environment config");
 
         // get the details
         $testEnv = $this->st->getTestEnvironmentConfig();

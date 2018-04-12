@@ -3,6 +3,7 @@
 use Storyplayer\SPv3\Modules\Asserts;
 use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Checkpoint;
+use Storyplayer\SPv3\Modules\Storyplayer;
 use Storyplayer\SPv3\Stories\BuildStory;
 
 // ========================================================================
@@ -54,7 +55,7 @@ $story->addPostTestInspection(function() {
 	$checkpoint = Checkpoint::getCheckpoint();
 
 	// what title are we expecting?
-	$expectedTitle = fromStoryplayer()->getStorySetting("modules.http.remotePage.title");
+	$expectedTitle = Storyplayer::fromSystemUnderTest()->getStorySetting("modules.http.remotePage.title");
 
 	// do we have the title we expected?
 	Asserts::assertsObject($checkpoint)->hasAttribute('title');

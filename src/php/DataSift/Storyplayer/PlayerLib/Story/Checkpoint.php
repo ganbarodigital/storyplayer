@@ -45,7 +45,7 @@ namespace DataSift\Storyplayer\PlayerLib;
 
 use ArrayIterator;
 use IteratorAggregate;
-use Storyplayer\SPv2\Modules\Log;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * our data container, that is available to each phase of a test

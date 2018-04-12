@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules\Host;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -19,7 +21,7 @@ $story->requiresStoryplayerVersion(2);
 // ------------------------------------------------------------------------
 
 $story->addAction(function() {
-    foreach (hostWithRole('ssl_target') as $hostname) {
+    foreach (Host::forEachHostWithRole('ssl_target') as $hostname) {
         $url = "https://" . fromHost($hostname)->getHostname();
         fromHttp()->get($url);
     }

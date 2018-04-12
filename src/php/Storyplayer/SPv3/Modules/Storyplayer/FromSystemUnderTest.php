@@ -41,10 +41,12 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\Storyplayer;
 
 use DataSift\Stone\DataLib\DataPrinter;
+use Prose\Prose;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Get information from the active system under test
@@ -61,7 +63,7 @@ class FromSystemUnderTest extends Prose
     public function getAppSetting($path)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get app setting '{$path}' from the system-under-test config");
+        $log = Log::usingLog()->startAction("get app setting '{$path}' from the system-under-test config");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.appSettings.' . $path;
@@ -87,7 +89,7 @@ class FromSystemUnderTest extends Prose
     public function getAppSettings($app)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get all settings for '{$app}' from the system-under-test config");
+        $log = Log::usingLog()->startAction("get all settings for '{$app}' from the system-under-test config");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.appSettings.' . $app;
@@ -113,7 +115,7 @@ class FromSystemUnderTest extends Prose
     public function getStorySetting($path)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get storySetting '{$path}' from the system-under-test config");
+        $log = Log::usingLog()->startAction("get storySetting '{$path}' from the system-under-test config");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.storySettings.' . $path;
@@ -139,7 +141,7 @@ class FromSystemUnderTest extends Prose
     public function getModuleSetting($path)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get module setting '{$path}' from the system-under-test config");
+        $log = Log::usingLog()->startAction("get module setting '{$path}' from the system-under-test config");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.moduleSettings.' . $path;
@@ -167,7 +169,7 @@ class FromSystemUnderTest extends Prose
     public function getModuleSettings($module)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get all settings for '{$module}' from the system-under-test config");
+        $log = Log::usingLog()->startAction("get all settings for '{$module}' from the system-under-test config");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.moduleSettings.' . $module;
@@ -195,7 +197,7 @@ class FromSystemUnderTest extends Prose
     public function getName()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the name of the actve system-under-test");
+        $log = Log::usingLog()->startAction("get the name of the actve system-under-test");
 
         // what is the full path to this data?
         $fullPath = 'systemundertest.name';
@@ -221,7 +223,7 @@ class FromSystemUnderTest extends Prose
     public function get($path)
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the setting '{$path}' from the actve system-under-test");
+        $log = Log::usingLog()->startAction("get the setting '{$path}' from the actve system-under-test");
 
         // what is the full path to this data?
         if (empty($path)) {
@@ -251,7 +253,7 @@ class FromSystemUnderTest extends Prose
     public function getConfig()
     {
         // what are we doing?
-        $log = usingLog()->startAction("get the system under test config");
+        $log = Log::usingLog()->startAction("get the system under test config");
 
         // get the details
         $config = $this->st->getActiveConfig();

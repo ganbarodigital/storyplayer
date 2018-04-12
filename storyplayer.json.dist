@@ -1,7 +1,7 @@
 {
     "defaults": [
         "--system-under-test", "storyplayer-2.x",
-        "--target", "storyplayer/test-environments/vagrant-vbox-centos-6.7/devEnv.php",
+        "--target", "storyplayer/test-environments/localhost",
 		"--users", "src/tests/stories/default-users.json",
         "play-story", "src/tests/stories/"
     ],

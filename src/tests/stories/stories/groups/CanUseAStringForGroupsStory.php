@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules\Asserts;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -37,6 +39,6 @@ $story->addAction(function() {
 $story->addPostTestInspection(function() use($story) {
 	$groups = $story->getGroup();
 
-	assertsArray($groups)->isArray();
-	assertsArray($groups)->equals(['Stories', 'Groups']);
+	Asserts::assertsArray($groups)->isArray();
+	Asserts::assertsArray($groups)->equals(['Stories', 'Groups']);
 });

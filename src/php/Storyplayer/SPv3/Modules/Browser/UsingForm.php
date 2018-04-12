@@ -46,6 +46,7 @@ namespace Storyplayer\SPv3\Modules\Browser;
 use Exception;
 use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * do things to forms in the web browser
@@ -92,7 +93,7 @@ class UsingForm extends UsingBrowser
     public function clearFields($fields)
     {
         // what are we doing?
-        $log = usingLog()->startAction("clear " . count($fields) . " field(s) in the form '{$this->formId}'");
+        $log = Log::usingLog()->startAction("clear " . count($fields) . " field(s) in the form '{$this->formId}'");
 
         foreach ($fields as $labelText => $fieldValue) {
             Browser::usingForm($this->formId)->clear()->theFieldLabelled($labelText);
@@ -107,7 +108,7 @@ class UsingForm extends UsingBrowser
         $formId = $this->formId;
 
         // what are we doing?
-        $log = usingLog()->startAction("fill in " . count($fields) . " field(s) in the form '{$this->formId}'");
+        $log = Log::usingLog()->startAction("fill in " . count($fields) . " field(s) in the form '{$this->formId}'");
 
         foreach ($fields as $labelText => $fieldValue) {
             // find the element
@@ -144,7 +145,7 @@ class UsingForm extends UsingBrowser
         $formId = $this->formId;
 
         // what are we doing?
-        $log = usingLog()->startAction("fill in " . count($fields) . " field(s) in form '{$formId}' if present");
+        $log = Log::usingLog()->startAction("fill in " . count($fields) . " field(s) in form '{$formId}' if present");
 
         foreach ($fields as $labelText => $fieldValue) {
             // find the element

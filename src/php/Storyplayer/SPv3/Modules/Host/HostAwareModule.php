@@ -47,6 +47,7 @@ use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use DataSift\Stone\ObjectLib\BaseObject;
 use Prose\Prose;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Host;
 
 /**
  * base class for all 'Host' Prose modules
@@ -79,7 +80,7 @@ class HostAwareModule extends Prose
         $hostId = $this->args[0];
 
         // do we know anything about this host?
-        $hostsTable = fromHostsTable()->getHostsTable();
+        $hostsTable = Host::fromHostsTable()->getHostsTable();
         if (!isset($hostsTable->$hostId)) {
             $hostDetails = new BaseObject();
             $hostDetails->hostId = $hostId;

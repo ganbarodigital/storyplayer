@@ -45,9 +45,11 @@ namespace DataSift\Storyplayer\Phases;
 
 use Exception;
 use DataSift\Storyplayer\HostLib;
-use Storyplayer\SPv2\Modules\Exceptions\ActionFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\ExpectFailedException;
-use Storyplayer\SPv2\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\Exceptions\ActionFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\ExpectFailedException;
+use Storyplayer\SPv3\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\Host;
+use Storyplayer\SPv3\Modules\TestEnvironment;
 
 /**
  * the TestEnvironmentDestruction phase
@@ -96,11 +98,11 @@ class TestEnvironmentDestructionPhase extends InfrastructurePhase
             //
             // now, let's get rid of any hosts (e.g. localhost) that
             // Storyplayer has injected into the table elsewhere
-            usingHostsTable()->emptyTable();
-            usingRolesTable()->emptyTable();
+            Host::usingHostsTable()->emptyTable();
+            TestEnvironment::usingRolesTable()->emptyTable();
 
             // remove the test environment signature
-            usingTargetsTable()->removeCurrentTestEnvironment();
+            TestEnvironment::usingTargetsTable()->removeCurrentTestEnvironment();
 
             // all done
             $phaseResult->setContinuePlaying();

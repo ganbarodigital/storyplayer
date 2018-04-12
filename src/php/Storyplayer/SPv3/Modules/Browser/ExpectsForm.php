@@ -45,6 +45,7 @@ namespace Storyplayer\SPv3\Modules\Browser;
 
 use Storyplayer\SPv3\Modules\Browser;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * test forms in the web browser

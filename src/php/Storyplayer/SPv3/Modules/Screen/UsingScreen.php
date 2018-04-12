@@ -52,6 +52,7 @@ use Storyplayer\SPv3\Modules\Host\HostAwareModule;
 use Storyplayer\SPv3\Modules\Log;
 use Storyplayer\SPv3\Modules\Screen;
 use Storyplayer\SPv3\Modules\Shell;
+use StoryplayerInternals\SPv3\Modules\ProcessesTable;
 
 /**
  * do things with (possibly remote) screen sessions
@@ -120,7 +121,7 @@ class UsingScreen extends HostAwareModule
         // stop the process
         foreach ($processes as $processDetails) {
             Host::onHost($this->args[0])->stopProcess($processDetails->pid);
-            usingProcessesTable()->removeProcess($this->args[0], $processDetails);
+            ProcessesTable::usingProcessesTable()->removeProcess($this->args[0], $processDetails);
         }
 
         // all done

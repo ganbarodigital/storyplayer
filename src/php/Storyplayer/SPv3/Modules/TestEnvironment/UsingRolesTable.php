@@ -41,9 +41,13 @@
  * @link      http://datasift.github.io/storyplayer
  */
 
-namespace Prose;
+namespace Storyplayer\SPv3\Modules\TestEnvironment;
 
+use Prose\Prose;
 use DataSift\Stone\ObjectLib\BaseObject;
+
+use Storyplayer\SPv3\Modules\Log;
+use StoryplayerInternals\SPv3\Modules\RuntimeTable;
 
 /**
  * manipulate the internal roles table
@@ -81,11 +85,11 @@ class UsingRolesTable extends Prose
         $hostId = $hostDetails->hostId;
 
         // what are we doing?
-        $log = usingLog()->startAction("add host '{$hostId}' to role '{$roleName}'");
+        $log = Log::usingLog()->startAction("add host '{$hostId}' to role '{$roleName}'");
 
         // do we have this role already?
         $hasRole = true;
-        $role = fromRuntimeTable($this->entryKey)->getItem($roleName);
+        $role = RuntimeTable::fromRuntimeTable($this->entryKey)->getItem($roleName);
         if ($role === null) {
             $role = [];
             $hasRole = false;
@@ -103,10 +107,10 @@ class UsingRolesTable extends Prose
 
         // add it
         if ($hasRole) {
-            usingRuntimeTable($this->entryKey)->updateItem($roleName, $role);
+            RuntimeTable::usingRuntimeTable($this->entryKey)->updateItem($roleName, $role);
         }
         else {
-            usingRuntimeTable($this->entryKey)->addItem($roleName, $role);
+            RuntimeTable::usingRuntimeTable($this->entryKey)->addItem($roleName, $role);
         }
 
         // all done
@@ -126,10 +130,10 @@ class UsingRolesTable extends Prose
     public function removeHostFromRole($hostId, $roleName)
     {
         // what are we doing?
-        $log = usingLog()->startAction("remove host '{$hostId}' from '{$roleName}'");
+        $log = Log::usingLog()->startAction("remove host '{$hostId}' from '{$roleName}'");
 
         // let's see what we have
-        $role = fromRuntimeTable($this->entryKey)->getItem($roleName);
+        $role = RuntimeTable::fromRuntimeTable($this->entryKey)->getItem($roleName);
         if (!is_array($role) || empty($role)) {
             // no such role
             $log->endAction();
@@ -146,7 +150,7 @@ class UsingRolesTable extends Prose
         $role = $this->filterHostIdFromRole($hostId, $role);
 
         // remove it
-        usingRuntimeTable($this->entryKey)->addItem($roleName, $role);
+        RuntimeTable::usingRuntimeTable($this->entryKey)->addItem($roleName, $role);
 
         // all done
         $log->endAction();
@@ -165,10 +169,10 @@ class UsingRolesTable extends Prose
     public function removeHostFromAllRoles($hostId)
     {
         // what are we doing?
-        $log = usingLog()->startAction("remove host '{$hostId}' from all roles");
+        $log = Log::usingLog()->startAction("remove host '{$hostId}' from all roles");
 
         // get the full table of roles
-        $roles = fromRuntimeTable($this->entryKey)->getTable();
+        $roles = RuntimeTable::fromRuntimeTable($this->entryKey)->getTable();
         foreach ($roles as $roleName => $hosts) {
             // skip any empty roles
             if (!is_array($hosts) || empty($hosts)) {
@@ -185,10 +189,10 @@ class UsingRolesTable extends Prose
 
             // save the role
             if (empty($role)) {
-                usingRuntimeTable($this->entryKey)->removeItem($roleName);
+                RuntimeTable::usingRuntimeTable($this->entryKey)->removeItem($roleName);
             }
             else {
-                usingRuntimeTable($this->entryKey)->updateItem($roleName, $role);
+                RuntimeTable::usingRuntimeTable($this->entryKey)->updateItem($roleName, $role);
             }
         }
 
@@ -228,10 +232,10 @@ class UsingRolesTable extends Prose
     public function emptyTable()
     {
         // what are we doing?
-        $log = usingLog()->startAction("empty the roles table completely");
+        $log = Log::usingLog()->startAction("empty the roles table completely");
 
         // remove it
-        usingRuntimeTable($this->entryKey)->removeTable();
+        RuntimeTable::usingRuntimeTable($this->entryKey)->removeTable();
 
         // all done
         $log->endAction();

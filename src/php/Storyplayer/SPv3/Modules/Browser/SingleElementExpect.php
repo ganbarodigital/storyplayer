@@ -47,6 +47,7 @@ use Exception;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use Prose\E5xx_ExpectFailed;
 use Storyplayer\SPv3\Modules\Exceptions;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * Helper class for testing elements using convenient, human-like names
@@ -80,7 +81,7 @@ class SingleElementExpect
     public function isBlank()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("$elementDesc '$elementName' must be blank");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must be blank");
 
             // test it
             if (strlen($element->attribute("value")) == 0) {
@@ -106,7 +107,7 @@ class SingleElementExpect
     public function isNotBlank()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("$elementDesc '$elementName' must not be blank");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must not be blank");
 
             // test it
             if (strlen($element->attribute("value")) > 0) {
@@ -132,7 +133,7 @@ class SingleElementExpect
     public function isChecked()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("$elementDesc '$elementName' must be checked");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must be checked");
 
             // test it
             if ($element->attribute("checked")) {
@@ -158,7 +159,7 @@ class SingleElementExpect
     public function isNotChecked()
     {
         $action = function($element, $elementName, $elementDesc) {
-            $log = usingLog()->startAction("$elementDesc '$elementName' must not be checked");
+            $log = Log::usingLog()->startAction("$elementDesc '$elementName' must not be checked");
 
             // test it
             if (!$element->attribute("checked")) {

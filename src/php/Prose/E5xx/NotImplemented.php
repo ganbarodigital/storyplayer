@@ -43,7 +43,7 @@
 
 namespace Prose;
 
-use Storyplayer\SPv2\Modules\Exceptions\NotImplementedException;
+use Storyplayer\SPv3\Modules\Exceptions\NotImplementedException;
 
 /**
  * Exception thrown when StoryTeller *does* find the Prose class to load,

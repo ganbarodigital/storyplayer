@@ -45,6 +45,7 @@ namespace Storyplayer\SPv3\Modules\Browser;
 
 use Exception;
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
+use Storyplayer\SPv3\Modules\Log;
 use Storyplayer\SPv3\Modules\Exceptions;
 
 /**
@@ -81,7 +82,7 @@ class TargettedBrowserExpects
     public function isBlank()
     {
         // what are we doing?
-        $log = usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must be blank");
+        $log = Log::usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must be blank");
 
         // get the element
         $element = $this->getElement();
@@ -99,7 +100,7 @@ class TargettedBrowserExpects
     public function isNotBlank()
     {
         // what are we doing?
-        $log = usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must not be blank");
+        $log = Log::usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must not be blank");
 
         // get the element
         $element = $this->getElement();
@@ -116,7 +117,7 @@ class TargettedBrowserExpects
     public function isChecked()
     {
         // what are we doing?
-        $log = usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must be checked");
+        $log = Log::usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must be checked");
 
         // get the element
         $element = $this->getElement();
@@ -133,7 +134,7 @@ class TargettedBrowserExpects
     public function isNotChecked()
     {
         // what are we doing?
-        $log = usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must not be checked");
+        $log = Log::usingLog()->startAction("{$this->elementDesc} '{$this->searchTerm}' must not be checked");
 
         // get the element
         $element = $this->getElement();
@@ -152,7 +153,7 @@ class TargettedBrowserExpects
     {
         $callable = $this->searchFunction;
 
-        $log = usingLog()->startAction("Find element on page with label, id or name '{$this->searchTerm}'");
+        $log = Log::usingLog()->startAction("Find element on page with label, id or name '{$this->searchTerm}'");
         try {
             $element = $callable();
             $log->endAction();

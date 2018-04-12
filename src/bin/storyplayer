@@ -251,10 +251,14 @@ function main($argv)
 		$deviceList->addHardCodedList(new HardCodedDevices);
 		$deviceList->findConfigs();
 
+		$testEnvironmentsList = new TestEnvironmentsList();
+		$testEnvironmentsList->findConfigs();
+
 		// put all of that into something we can give to the CliEngine
 		$injectables->initKnownDevicesSupport($deviceList);
 		$injectables->initKnownSystemsUnderTestSupport($sutList);
 		$injectables->initDefaultSystemUnderTestName($injectables);
+		$injectables->initKnownTestEnvironmentsSupport($testEnvironmentsList);
 
 		// now, load our list of active test environments
 		$injectables->initRunningTestEnvironmentsListSupport($injectables);
@@ -344,9 +348,9 @@ function main($argv)
 	{
 		echo "*** fatal error: " . $e->getMessage() . "\n\n";
 
-		if (get_class($e) !== 'Exception') {
+		// if (get_class($e) !== 'Exception') {
 			echo "Stack trace is:\n" . $e->getTraceAsString() . "\n";
-		}
+		//}
 
 		return 1;
 	}

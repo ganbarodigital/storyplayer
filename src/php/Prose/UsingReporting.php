@@ -43,7 +43,7 @@
 
 namespace Prose;
 
-use Storyplayer\SPv2\Modules\Log;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * placeholders used as default behaviour for test phases

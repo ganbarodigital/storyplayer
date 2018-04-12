@@ -1,5 +1,7 @@
 <?php
 
+use Storyplayer\SPv3\Modules as SPv3;
+
 // ========================================================================
 //
 // STORY DETAILS
@@ -29,10 +31,10 @@ $story->addAction(function() {
 // ------------------------------------------------------------------------
 
 $story->addPostTestInspection(function() {
-    $storySettings = fromSystemUnderTest()->getStorySetting('testData');
+    $storySettings = SPv3\Storyplayer::fromSystemUnderTest()->getStorySetting('testData');
 
-    assertsObject($storySettings)->isNotNull();
-    assertsObject($storySettings)->hasAttribute('name');
-    assertsObject($storySettings)->hasAttribute('version');
-    assertsObject($storySettings)->hasAttribute('isStorySettings');
+    SPv3\Asserts::assertsObject($storySettings)->isNotNull();
+    SPv3\Asserts::assertsObject($storySettings)->hasAttribute('name');
+    SPv3\Asserts::assertsObject($storySettings)->hasAttribute('version');
+    SPv3\Asserts::assertsObject($storySettings)->hasAttribute('isStorySettings');
 });

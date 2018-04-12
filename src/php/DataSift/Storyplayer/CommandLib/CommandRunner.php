@@ -45,7 +45,7 @@ namespace DataSift\Storyplayer\CommandLib;
 
 use DataSift\Storyplayer\PlayerLib\StoryTeller;
 use Phix_Project\ContractLib2\Contract;
-use Storyplayer\SPv2\Modules\Log;
+use Storyplayer\SPv3\Modules\Log;
 
 /**
  * helper for running a command and managing its output

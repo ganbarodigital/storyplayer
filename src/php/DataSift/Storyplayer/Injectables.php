@@ -55,6 +55,7 @@ use DataSift\Storyplayer\Injectables\DefaultConfigSupport;
 use DataSift\Storyplayer\Injectables\DefaultSystemUnderTestName;
 use DataSift\Storyplayer\Injectables\KnownDevicesSupport;
 use DataSift\Storyplayer\Injectables\KnownSystemsUnderTestSupport;
+use DataSift\Storyplayer\Injectables\KnownTestEnvironmentsSupport;
 use DataSift\Storyplayer\Injectables\OutputSupport;
 use DataSift\Storyplayer\Injectables\PhaseLoaderSupport;
 use DataSift\Storyplayer\Injectables\ProseLoaderSupport;
@@ -88,6 +89,7 @@ class Injectables extends BaseInjectables
     use DefaultSystemUnderTestName;
     use KnownDevicesSupport;
     use KnownSystemsUnderTestSupport;
+    use KnownTestEnvironmentsSupport;
     use OutputSupport;
     use PhaseLoaderSupport;
     use ProseLoaderSupport;
